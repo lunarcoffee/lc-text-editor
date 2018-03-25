@@ -247,4 +247,4 @@ namespace WPFTest {
             }
         }
     }
-};
+}
