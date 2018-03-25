@@ -1,0 +1,70 @@
+﻿<Window x:Class="WPFTest.MainWindow"
+        Name="AppWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="LC Text Editor" Height="450" Width="700">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="AlwaysCommand_CanExecute" Executed="NewFile_OnClick"/>
+        <CommandBinding Command="Open" CanExecute="AlwaysCommand_CanExecute" Executed="OpenFile_OnClick"/>
+        <CommandBinding Command="Save" CanExecute="SaveCommand_CanExecute" Executed="SaveFile_OnClick"/>
+    </Window.CommandBindings>
+    <StackPanel>
+        <Menu Name="AppMenu" Background="White">
+            <MenuItem Header="_File">
+                <MenuItem Name="AppSubmenu1" Header="_New" Command="New"/>
+                <MenuItem Name="AppSubmenu2" Header="_Open" Command="Open"/>
+                <MenuItem Name="AppSubmenu3" Header="_Save" Command="Save"/>
+                <MenuItem Name="AppSubmenu4" Header="S_ave As" Click="SaveAsFile_OnClick"/>
+                <MenuItem Name="AppSubmenu5" Header="_Close File" Click="CloseFile_OnClick"/>
+                <Separator/>
+                <MenuItem Name="AppSubmenu6" Header="A_bout" Click="AboutDialog_OnClick"/>
+                <MenuItem Name="AppSubmenu7" Header="_Exit" Click="ExitProgram_OnClick"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Name="AppSubmenu8" Header="Select _All" Command="SelectAll"/>
+                <MenuItem Name="AppSubmenu9" Header="_Copy" Command="Copy"/>
+                <MenuItem Name="AppSubmenu10" Header="C_ut" Command="Cut"/>
+                <MenuItem Name="AppSubmenu11" Header="_Paste" Command="Paste"/>
+                <Separator/>
+                <MenuItem Name="AppSubmenu12" Header="_Undo" Command="Undo"/>
+                <MenuItem Name="AppSubmenu13" Header="_Redo" Command="Redo"/>
+            </MenuItem>
+            <MenuItem Header="_Options">
+                <MenuItem Name="AppSubmenu14" Header="_Typeface">
+                    <MenuItem Header="Default" Click="FontDefault_OnClick"/>
+                    <MenuItem Header="Monospaced" Click="FontMonospaced_OnClick"/>
+                </MenuItem>
+                <MenuItem Name="AppSubmenu15" Header="Dark Theme" IsCheckable="True" 
+                          Checked="DarkTheme_OnCheck" Unchecked="DarkTheme_OnUncheck"/>
+                <Separator/>
+                <MenuItem Name="AppSubmenu16" Header="Wrap Text" IsCheckable="True"
+                          Checked="WrapText_OnCheck" Unchecked="WrapText_OnUncheck"/>
+            </MenuItem>
+        </Menu>
+        <TextBox Name="TextArea"
+                 SelectionChanged="TextArea_OnSelectionChanged"
+                 VerticalAlignment="Top"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 Margin="6"
+                 Width="Auto"
+                 Height="360"/>
+        <StatusBar Name="AppStatusBar"
+                   VerticalAlignment="Bottom"
+                   Background="White">
+            <StatusBarItem>
+                <TextBlock Name="CurrentFile" Text=" No file open."/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Name="CurrentCaretLocation" Text="1:1 "/>
+            </StatusBarItem>
+        </StatusBar>
+    </StackPanel>
+</Window>
